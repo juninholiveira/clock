@@ -1,5 +1,5 @@
 //Esse método chama a função setClock de 1 em 1 segundo (1000ms)
-setInterval(setClock, 1000)
+setInterval(setClock, 10)
 
 //Busca no documento e salva nas constantes os elementos físicos dos ponteiros no HTML
 const secondHand = document.querySelector('[data-second-hand]')
@@ -10,7 +10,8 @@ const hourHand = document.querySelector('[data-hour-hand]')
 function setClock()
 {
     const currentDate = new Date()                                          //Cria um novo objeto Date que pega o valor de tempo atual do sistema
-    const secondsRatio = currentDate.getSeconds() / 60                      //Pega o valor de segundos atuais e divide por 60 para obter um valor francionário entre 0 e 1
+    const milisecondsRatio = currentDate.getMilliseconds() / 1000           //Eu pego o valor de milisegundos para adicionar no ponteiro de segundos e ter um movimento suave
+    const secondsRatio = (milisecondsRatio + currentDate.getSeconds()) / 60 //Pega o valor de segundos atuais e divide por 60 para obter um valor francionário entre 0 e 1
     const minutesRatio = (secondsRatio + currentDate.getMinutes()) / 60     //Pega o valor de minutos atuais e divide por 60 para obter a fração de onde o ponteiro deve estar, mas adiciona os segundos para fazer isso gradualmente
     const hoursRatio = (minutesRatio + currentDate.getHours()) / 12         //Pega o valor de horas atuais e divide por 60 para obter a fração de onde o ponteiro deve estar, mas adiciona os minutos para fazer isso gradualmente
 
