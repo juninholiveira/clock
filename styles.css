@@ -1,0 +1,97 @@
+*, *::after, *::before
+{
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    --background-color: rgb(230, 230, 230);
+    --pointers-color: rgb(54, 54, 54);
+    --seconds-color: rgb(177, 44, 44);
+}
+
+body
+{
+    background: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.clock
+{
+    width: 300px;
+    height: 300px;
+    background: var(--background-color);
+    border-radius: 50%;
+    position: relative;
+    box-shadow:
+        -7px -7px 7px 0 rgba(255,255,255,.5),
+        7px 7px 7px 0 rgba(0,0,0,.05);
+}
+
+.clock .number
+{
+    --rotation: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate(var(--rotation));
+}
+
+.clock .number1 {--rotation: 30deg;}
+.clock .number2 {--rotation: 60deg;}
+.clock .number3 {--rotation: 90deg;}
+.clock .number4 {--rotation: 120deg;}
+.clock .number5 {--rotation: 150deg;}
+.clock .number6 {--rotation: 180deg;}
+.clock .number7 {--rotation: 210deg;}
+.clock .number8 {--rotation: 240deg;}
+.clock .number9 {--rotation: 270deg;}
+.clock .number10 {--rotation: 300deg;}
+.clock .number11 {--rotation: 330deg;}
+
+/* Pseudo-element */
+.clock::after
+{
+    content: '';
+    position: absolute;
+    background-color: var(--pointers-color);
+    z-index: 11;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.clock .hand
+{
+    --rotation: 30;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    z-index: 10;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+}
+
+.clock .hand.second
+{
+    width: 2px;
+    height: 40%;
+    background-color: var(--seconds-color);
+}
+.clock .hand.minute
+{
+    width: 4px;
+    height: 40%;
+    background-color: var(--pointers-color);
+}
+.clock .hand.hour
+{
+    width: 7px;
+    height: 30%;
+    background-color: var(--pointers-color);
+}
